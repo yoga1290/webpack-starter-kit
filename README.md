@@ -1,3 +1,11 @@
-# My Webpack starter kit(s)
+# Usage:
 
-+ [Webpack CLI + ReactJS](https://github.com/yoga1290/webpack-starter-kit/tree/ReactJS)
+```BASH
+npm install -g webpack;
+npm install babel-core babel-loader babel-preset-react glob react react-dom react-hot-loader flux classnames keymirror;
+webpack;
+```
+
+# Implementation notes:
+
++	`bundle.js` as last element in the `body`
