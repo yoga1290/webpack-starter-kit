@@ -1,0 +1,15 @@
+{
+  "name": "webpack-starter-kit",
+  "version": "1.0.0",
+  "dependencies": {
+    "glob": "^7.0.3",
+    "webpack": "*",
+    "classnames": "*",
+    "keymirror": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack"
+  },
+  "author": "yoga1290"
+}
