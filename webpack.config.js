@@ -3,16 +3,11 @@ var path = require("path");
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var webpackEntries = [];
-// see https://github.com/isaacs/node-glob
-var webpackEntries = glob.sync("./js/**/*.js");
-for(var i=0;i<webpackEntries.length;i++)
-    webpackEntries[i] = webpackEntries[i].split('.js').join('');
-
 var configuration = {
     context: path.join(__dirname, "."),
     entry: {
-        js: webpackEntries,
+        // see https://github.com/isaacs/node-glob
+        js: glob.sync("./js/**/*.js"),
         css: glob.sync("./css/**/*.css")
     },
     output: {
@@ -38,7 +33,6 @@ var configuration = {
     module: {
         //http://webpack.github.io/docs/using-loaders.html#configuration
         loaders: [
-           // Extract css files
             // see https://webpack.github.io/docs/stylesheets.html#separate-css-bundle
             {
                 test: /\.css$/,
