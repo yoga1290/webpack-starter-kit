@@ -1,19 +1,30 @@
 var glob = require("glob");
 var path = require("path");
 var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+var webpackEntries = [];
+// see https://github.com/isaacs/node-glob
+var webpackEntries = glob.sync("./js/**/*.js");
+for(var i=0;i<webpackEntries.length;i++)
+    webpackEntries[i] = webpackEntries[i].split('.js').join('');
 
 var configuration = {
     context: path.join(__dirname, "."),
-    // https://github.com/webpack/webpack/issues/370
-    entry: glob.sync("./js/*"),
+    entry: {
+        js: webpackEntries,
+        css: glob.sync("./css/**/*.css")
+    },
     output: {
         path: './',
-        filename: './bundle.js'
+        filename: './app.js'
     },
     plugins: [
+        new ExtractTextPlugin("style.css"),
         new webpack.optimize.UglifyJsPlugin({
           compress: { warnings: false }
-        })],
+        })
+    ],
     /*
         @see https://webpack.github.io/docs/configuration.html#module-loaders
         IMPORTANT:
@@ -27,16 +38,12 @@ var configuration = {
     module: {
         //http://webpack.github.io/docs/using-loaders.html#configuration
         loaders: [
-           {
+           // Extract css files
+            // see https://webpack.github.io/docs/stylesheets.html#separate-css-bundle
+            {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader?root=.'},
-                // https://github.com/webpack/css-loader#root-relative-urls
-            {
-                test: /\.html$/,
-                loader: 'raw-loader'},
-            {
-                test: /\.(svg|ttf|eot|png|woff)$/,
-                loader: 'url-loader?limit=100000'}
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            }
         ]
     }
 };

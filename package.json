@@ -2,6 +2,8 @@
   "name": "webpack-starter-kit",
   "version": "1.0.0",
   "dependencies": {
+    "balanced-match": "^0.4.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "glob": "^7.0.3",
     "webpack": "*",
     "classnames": "*",
